@@ -3,6 +3,15 @@ package com.addressbook;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+* <h1>PhoneNumber</h1>
+* <p>The PhoneNumber class provides an effective way of representing standard 10-digit phone numbers, regardless of the way the phone number is entered.</p>
+*
+* @author	Kaleshwar Singh
+* @version	1.0
+* @since	2014-03-28
+*/
+
 
 public class PhoneNumber {
 	private String countryCode = null;
@@ -11,61 +20,77 @@ public class PhoneNumber {
 	private String subscriberNum = null;
 	private String extension = null;
 
-	/*
-	^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$
-	
-	It would match the following examples and much more:
-
-	18005551234
-	1 800 555 1234
-	+1 800 555-1234
-	+86 800 555 1234
-	1-800-555-1234
-	1 (800) 555-1234
-	(800)555-1234
-	(800) 555-1234
-	(800)5551234
-	800-555-1234
-	800.555.1234
-	800 555 1234x5678
-	8005551234 x5678
-	1    800    555-1234
-	1----800----555-1234
-	Regardless of the way the phone number is entered, the capture groups can be used to breakdown the phone number so it can be processed it in the code.
-
-	Group1: Country Code (ex: 1 or 86)
-	Group2: Area Code (ex: 800)
-	Group3: Exchange (ex: 555)
-	Group4: Subscriber Number (ex: 1234)
-	Group5: Extension (ex: 5678)
-
-	Here is a breakdown of the expressio:
-
-	^\s*                #Line start, match any whitespaces at the beginning if any.
-	(?:\+?(\d{1,3}))?   #GROUP 1: The country code. Optional.
-	[-. (]*             #Allow certain non numeric characters that may appear between the Country Code and the Area Code.
-	(\d{3})             #GROUP 2: The Area Code. Required.
-	[-. )]*             #Allow certain non numeric characters that may appear between the Area Code and the Exchange number.
-	(\d{3})             #GROUP 3: The Exchange number. Required.
-	[-. ]*              #Allow certain non numeric characters that may appear between the Exchange number and the Subscriber number.
-	(\d{4})             #Group 4: The Subscriber Number. Required.
-	(?: *x(\d+))?       #Group 5: The Extension number. Optional.
-	\s*$                #Match any ending whitespaces if any and the end of string.
-	*/
 
 	private static final Pattern p 
 	= Pattern.compile("^\\s*(?:\\+?(\\d{1,3}))?[-. (]*(\\d{3})[-. )]*(\\d{3})[-. ]*(\\d{4})(?: *x(\\d+))?\\s*$");
 
-	
+		
 	private Matcher m;
-
+	
+	/**
+	* This constructor is used to create and initialize instance of the PhoneNumber class.
+	*/
 	public PhoneNumber() { }							// Default constructor
 
+	/**
+	* This constructor is used to create and initialize instance of the PhoneNumber class.
+	*
+	* It would accept the following examples and much more,
+	* regardless of the way the phone number is entered:
+	* <ul> 
+	* 	<li>18005551234</li>
+	* 	<li>1 800 555 1234</li>
+	* 	<li>+1 800 555-1234</li>
+	* 	<li>+86 800 555 1234</li>
+	* 	<li>1-800-555-1234</li>
+	* 	<li>1 (800) 555-1234</li>
+	* 	<li>(800)555-1234</li>
+	* 	<li>(800) 555-1234</li>
+	* 	<li>(800)5551234</li>
+	* 	<li>800-555-1234</li>
+	* 	<li>800.555.1234</li>
+	* 	<li>800 555 1234x5678</li>
+	* 	<li>8005551234 x5678</li>
+	* 	<li>1    800    555-1234</li>
+	* 	<li>1----800----555-1234</li>
+	*</ul>
+	* @param phoneNumber						A String representation of the phone number.
+	* @exception InvalidPhoneNumberException	On invalid phoneNumber format.
+	* @see InvalidPhoneNumberException
+	*/
 	public PhoneNumber(String phoneNumber) throws InvalidPhoneNumberException {		
 		parsePhoneNumber(phoneNumber);
 	}
 
-	public void editPhoneNumber(String phoneNumber) throws InvalidPhoneNumberException{	// Mutator
+	/**
+	* This method is used to the phone number of a PhoneNumber instance.
+	*
+	* It would accept the following examples and much more, 
+	* regardless of the way the phone number is entered:
+	* <ul> 
+	* 	<li>18005551234</li>
+	* 	<li>1 800 555 1234</li>
+	* 	<li>+1 800 555-1234</li>
+	* 	<li>+86 800 555 1234</li>
+	* 	<li>1-800-555-1234</li>
+	* 	<li>1 (800) 555-1234</li>
+	* 	<li>(800)555-1234</li>
+	* 	<li>(800) 555-1234</li>
+	* 	<li>(800)5551234</li>
+	* 	<li>800-555-1234</li>
+	* 	<li>800.555.1234</li>
+	* 	<li>800 555 1234x5678</li>
+	* 	<li>8005551234 x5678</li>
+	* 	<li>1    800    555-1234</li>
+	* 	<li>1----800----555-1234</li>
+	*</ul>
+	*
+	* @param phoneNumber						A String representation of the phone number.
+	* @exception InvalidPhoneNumberException	On invalid phone number format.
+	* @see InvalidPhoneNumberException
+	*/
+
+	public void editPhoneNumber(String phoneNumber) throws InvalidPhoneNumberException {
 		parsePhoneNumber(phoneNumber);
 	}
 	
@@ -77,11 +102,13 @@ public class PhoneNumber {
 			exchangeNum = m.group(3);
 			subscriberNum = m.group(4);
 			extension = m.group(5);
-		} else {
-			throw new InvalidPhoneNumberException("Incorrect phone number format", phoneNumber);	
-		}
+		} else
+			throw new InvalidPhoneNumberException("Incorrect phone number format", phoneNumber);
 	}
-	
+
+	/**
+	* Converts the phone number ot a string in the format +x (xxx) xxx-xxxx.
+	*/
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder(20);
