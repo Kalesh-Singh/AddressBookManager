@@ -31,7 +31,7 @@ public class Address {
 	* This constructor creates and initializes an instance of the address.
 	* @param houseNumber					An int representing the house number.
 	* @param street							A String representing the street.
-	* @param city							A string represnting the city.
+	* @param city							A String represnting the city.
 	* @param state							A String representing the state.
 	* @param zipCode						An String representing the zip code.
 	* @exception InvalidAddressException	On invalid address entry.
@@ -50,7 +50,7 @@ public class Address {
 	* This method can be used to edit an instaance of the Address class.
 	* @param houseNumber					An int representing the house number.
 	* @param street							A String representing the street.
-	* @param city							A string represnting the city.
+	* @param city							A String represnting the city.
 	* @param state							A String representing the state.
 	* @param zipCode						An String representing the zip code.
 	* @exception InvalidAddressException	On invalid address entry.
@@ -58,7 +58,6 @@ public class Address {
 	*/
 	public void editAddress() throws InvalidAddressException {
 		try {
-			System.out.println("\t\tPlease Provide the Address Infomation");
 			System.out.print("Enter the house number: ");
 			houseNumber = sc.nextInt();
 			sc.nextLine();
