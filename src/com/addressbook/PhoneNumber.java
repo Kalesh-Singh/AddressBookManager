@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 /**
 * <h1>PhoneNumber</h1>
-* <p>The PhoneNumber class provides an effective way of representing standard 10-digit phone numbers, regardless of the way the phone number is entered.</p>
+* <p>The PhoneNumber class provides convenient way of representing standard 10-digit phone numbers, regardless of the way the phone number is entered.</p>
 *
 * @author	Kaleshwar Singh
 * @version	1.0
@@ -63,7 +63,7 @@ public class PhoneNumber {
 	}
 
 	/**
-	* This method is used to the phone number of a PhoneNumber instance.
+	* This method is used to edit an intance of the PhoneNumber class.
 	*
 	* It would accept the following examples and much more, 
 	* regardless of the way the phone number is entered:
@@ -107,7 +107,8 @@ public class PhoneNumber {
 	}
 
 	/**
-	* Converts the phone number ot a string in the format +x (xxx) xxx-xxxx.
+	* Converts the phone number to a String in the format +x (xxx) xxx-xxxx.
+	* @return A String representation of the PhoneNumber instance.
 	*/
 	@Override
 	public String toString() {

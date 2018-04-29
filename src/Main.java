@@ -1,20 +1,20 @@
+import java.util.Scanner;
+
 import com.addressbook.PhoneNumber;
 import com.addressbook.InvalidPhoneNumberException;
-
-import java.util.Scanner;
+import com.addressbook.Address;
+import com.addressbook.InvalidAddressException;
 
 public class Main {
 	private static Scanner scanner = new Scanner(System.in);
-
 	public static void main (String[] args) {
 		try {
-			PhoneNumber myNumber = new PhoneNumber("1-929-355-0415");
-			for (int i = 0; i < 15; i++) {
-				System.out.println("My phone number is " + myNumber);
-				System.out.print("Enter your phone number : ");
-				myNumber.editPhoneNumber(scanner.nextLine());
+			Address myAddress = new Address();
+			for (int i = 0; i < 5; i++) {
+				myAddress.editAddress();
+				System.out.println("My address is " + myAddress);
 			}
-		} catch (InvalidPhoneNumberException e) {
+		} catch (InvalidAddressException e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 		}
