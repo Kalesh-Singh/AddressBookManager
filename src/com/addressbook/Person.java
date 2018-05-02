@@ -1,6 +1,8 @@
 package com.addressbook;
 
 import java.io.Serializable;
+import java.util.Scanner;
+import java.util.InputMismatchException;
 
 /**
 <h1>Person</h1>
@@ -109,22 +111,50 @@ public class Person implements Serializable {
 	}
 
 	/**
-	* This method can be used to edit the person's address.
-	* @exception 	InvalidAddressException
-	* @see			InvalidAddressException
-	*/
-	public void editAddress() throws InvalidAddressException {
-		address.editAddress();
-	}
+	 * This method can be used to edit the person's information.
+	 * @exception 	InvalidAddressException
+	 * @exception 	InvalidPhoneNumberException
+	 * @see			InvalidAddressException
+	 * @see			InvalidPhoneNumberException
+	 */
+	public void editPerson () throws InvalidAddressException, InvalidPhoneNumberException {
+		int option = -1;
+		Scanner sc = new Scanner(System.in);
+		while ((option < 1) || (option > 3)) {
+			System.out.println("Select the field you'd like to edit:");
+			System.out.println("1. Address");
+			System.out.println("2. Phone number");
+			System.out.println("3. Done");
+			System.out.print("Enter an option (1 - 3): ");
+			try {
+				option = sc.nextInt();
+			} catch (InputMismatchException e) {
+				System.out.println("\nERROR: The entered option must be a number from 1 to 3.");
+				System.out.println("Please try again\n");
+				sc.nextLine();		// Clear the buffer
+			}
+			System.out.println();
+		}
 
-	/**
-	* This method can be used to edit the person's phone number.
-	* @param phoneNumber	A string represrentation of the person's new phone number.
-	* @exception 			InvalidPhoneNumberException
-	* @see					InvalidPhoneNumberException
-	*/
-	public void editPhoneNumber(String phoneNumber) throws InvalidPhoneNumberException {
-		this.phoneNumber.editPhoneNumber(phoneNumber);
+		switch (option) {
+			case 1:
+				System.out.println("Editing " + firstName + " " + lastName + "'s address:"); 
+				address.editAddress();
+				this.editPerson();
+				break;
+			case 2:
+				System.out.println("Editing " + firstName + " " + lastName + "'s phoneNumber");
+				System.out.print("Please enter the new phone number: ");
+				sc.nextLine();		// Clearing the buffer.
+				phoneNumber.editPhoneNumber(sc.nextLine());
+				this.editPerson();
+				break;
+			case 3:
+				System.out.println("Changes accepted..\n");
+				break;
+			default:
+				break;
+		}
 	}
 
 	/**
@@ -142,7 +172,7 @@ public class Person implements Serializable {
 		if (address.toString().length() > 0)
 			sb.append("\nAddress: " + address.toString());
 		if (phoneNumber.toString().length() > 0)
-			sb.append("\nPhone Number: " + phoneNumber.toString());
+			sb.append("\nPhone Number: " + phoneNumber.toString() + "\n");
 
 		return sb.toString();
 	}
@@ -159,8 +189,6 @@ public class Person implements Serializable {
 		Person other = (Person) o;
 		return
 			(this.firstName.equals(other.firstName)) &&
-			(this.lastName.equals(other.lastName)) &&
-			(this.address.equals(other.address)) &&
-			(this.phoneNumber.equals(other.phoneNumber));
+			(this.lastName.equals(other.lastName));
 	}	
 }

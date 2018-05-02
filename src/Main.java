@@ -1,32 +1,27 @@
 import java.util.Scanner;
-
-import com.addressbook.PhoneNumber;
-import com.addressbook.InvalidPhoneNumberException;
-import com.addressbook.Address;
-import com.addressbook.InvalidAddressException;
-import com.addressbook.Person;
+import com.addressbook.*;
 
 public class Main {
 	private static Scanner scanner = new Scanner(System.in);
 	public static void main (String[] args) {
-		try {
-			Person person = new Person("John", "Wick");
-			for (int i = 0; i < 5; i++) {
-				System.out.println("\n\nPerson\n" + person);
-				System.out.println("\t\tEnter the address information:");
-				person.editAddress();
-				System.out.println("\n\nPerson\n" + person);
-				System.out.println("Enter the phoneNumber: ");
-				person.editPhoneNumber(scanner.nextLine());
-				System.out.println("\n\nPerson\n" + person);
-				System.out.println("\n\n\n");
+		AddressBook addrbk = new AddressBook();
+		for (int i = 0; i < 5; i++) {
+			try {
+				addrbk.createEntry();
+				System.out.println(addrbk);
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+				e.printStackTrace();
+				System.exit(0);
 			}
-		} catch (InvalidAddressException e) {
-			System.out.println(e.getMessage());
-			e.printStackTrace();
-		} catch (InvalidPhoneNumberException e) {
-			System.out.println(e.getMessage());
-			e.printStackTrace();
 		}
+
+		addrbk.sortByName();
+		System.out.println(addrbk);
+		System.out.println("\n");
+
+		addrbk.sortByZipCode();
+		System.out.println(addrbk);
+		System.out.println("\n");
 	}
 }
