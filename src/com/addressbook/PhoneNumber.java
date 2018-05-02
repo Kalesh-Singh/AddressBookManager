@@ -2,6 +2,7 @@ package com.addressbook;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.io.Serializable;
 
 /**
 * <h1>PhoneNumber</h1>
@@ -13,7 +14,7 @@ import java.util.regex.Pattern;
 */
 
 
-public class PhoneNumber {
+public class PhoneNumber implements Serializable {
 	private String countryCode = null;
 	private String areaCode = null;
 	private String exchangeNum = null;
@@ -127,5 +128,21 @@ public class PhoneNumber {
 		
 		return sb.toString();
 	}
-	
+
+	/**
+	* This method can be used to check whether 2 instances of PhoneNumber are equal.
+	* @return A boolean of indicating whether the phone numbers are equal or not.
+	*/
+	@Override
+	public boolean equals(Object o) {
+		if (o == this)
+			return true;
+		if (!(o instanceof PhoneNumber))
+			return false;
+		PhoneNumber other = (PhoneNumber) o;
+		return 
+			(this.areaCode.equals(other.areaCode)) &&
+			(this.exchangeNum.equals(other.exchangeNum)) &&
+			(this.subscriberNum.equals(other.subscriberNum));
+	}
 }

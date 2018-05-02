@@ -1,5 +1,7 @@
 package com.addressbook;
 
+import java.io.Serializable;
+
 /**
 <h1>Person</h1>
 <p>The Person provides a convenient way of representing a Person with first and last names, address and phone number.</p>
@@ -9,7 +11,7 @@ package com.addressbook;
 * @since	2018-04-30
 */
 
-public class Person {
+public class Person implements Serializable {
 	private String firstName = null;
 	private String lastName = null;
 	Address address = null;
@@ -144,4 +146,21 @@ public class Person {
 
 		return sb.toString();
 	}
+
+	/* This method provides a way of comparing 2 person's to check if they are the same.
+	 * @return A boolean indicating whether the persons are the same.
+	 */
+	@Override
+	public boolean equals(Object o) {
+		if (o == this)
+			return true;
+		if (!(o instanceof Person))
+			return false;
+		Person other = (Person) o;
+		return
+			(this.firstName.equals(other.firstName)) &&
+			(this.lastName.equals(other.lastName)) &&
+			(this.address.equals(other.address)) &&
+			(this.phoneNumber.equals(other.phoneNumber));
+	}	
 }

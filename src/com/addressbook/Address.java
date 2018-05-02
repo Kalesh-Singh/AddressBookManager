@@ -1,8 +1,8 @@
 package com.addressbook;
 
 import java.util.Scanner;
-
 import java.util.InputMismatchException;
+import java.io.Serializable;
 
 /**
 *<h1>Address</h1>
@@ -13,7 +13,7 @@ import java.util.InputMismatchException;
 * @since	2018-04-28
 */
 
-public class Address {
+public class Address implements Serializable {
 	private int houseNumber = -1;
 	private String street = "";
 	private String city = "";
@@ -56,6 +56,15 @@ public class Address {
 	* @exception InvalidAddressException	On invalid address entry.
 	* @see InvaildAddressException
 	*/
+	
+	/**
+	 * Returns the person's zip code.
+	 * @return A String representation of the person's zip code.
+	 */
+	public String getZipCode() {
+		return zipCode;
+	}
+	
 	public void editAddress() throws InvalidAddressException {
 		try {
 			System.out.print("Enter the house number: ");
@@ -116,5 +125,25 @@ public class Address {
 
 		return sb.toString();
 	}
+	
+	/**
+	* This method provides a way to compare Addresses for equality.
+	* @return A boolean indicating whether the addresses are equal or not.
+	*/
+	@Override
+	public boolean equals(Object o) {
+		if (o == this)
+			return true;
+		if(!(o instanceof Address))
+			return false;
+		Address other = (Address) o;
+		return 
+			(this.houseNumber == other.houseNumber) &&
+			(this.street.equals(other.street)) &&
+			(this.city.equals(other.city)) &&
+			(this.state.equals(other.state)) &&
+			(this.zipCode.equals(other.zipCode));
+	}
+
 
 }
