@@ -31,14 +31,15 @@ public class AddressBookManagerMenu {
 				System.out.println("________________________________________________________________");
 
 				System.out.println(" 1. Create new address book");
-				System.out.println(" 2. Open an address book");
+				System.out.println(" 2. Open address book");
 				System.out.println(" 3. Save address book");
 				System.out.println(" 4. Save address book as");
 				System.out.println(" 5. Edit address book");
 				System.out.println(" 6. Close address book");
 				System.out.println(" 7. Close ALL address books");
+				
+				System.out.println(" 8. View address book");
 				/*
-				System.out.println(" 8. Close address book without saving");
 				System.out.println(" 9. Close ALL address books without saving");
 				*/
 				System.out.println("10. Show all open address books");
@@ -87,10 +88,11 @@ public class AddressBookManagerMenu {
 				case 7:
 					this.closeAll();
 					break;
-				/*
+				
 				case 8:
-					this.closeAddressBookWithoutSaving();
+					this.viewAddressBook();
 					break;
+				/*
 				case 9:
 					this.closeAllWithoutSaving();
 					break;
@@ -356,4 +358,21 @@ public class AddressBookManagerMenu {
 			new AddressBookMenu(addressBook).displayMenu();
 		}
 	}
+
+	private void viewAddressBook () {
+		addressBookManager.showOpenAddressBooks();
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the name of the address book you want to view: ");
+		String addressBookName = sc.nextLine();
+		AddressBook addressBook = addressBookManager.getAddressBooks().get(addressBookName);
+		if (addressBook == null)
+			System.out.println("No such address book is open: " + addressBookName);
+		else {
+			System.out.println();
+			System.out.println("ADDRESS BOOK: " + addressBookName);
+			System.out.println();
+			new AddressBookMenu(addressBook).showAllEntries();
+		}
+	}
+
 }

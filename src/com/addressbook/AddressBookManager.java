@@ -71,17 +71,6 @@ public class AddressBookManager {
 		}
 	}
 
-	//TODO: Integrate this new closing mechanism
-	public void closeAddressBook (String addressBookName) throws InvalidNameException, IOException {
-		
-	}
-
-	public void closeAllAddressBooks () throws InvalidNameException, IOException {
-
-	}
-
-	// TODO: new functions to integrate ends here
-
 	public void closeAndSaveAddressBook (String addressBookName) throws InvalidNameException, IOException {
 		this.saveAddressBook(addressBookName);
 		addressBooks.remove(addressBookName);
@@ -109,10 +98,13 @@ public class AddressBookManager {
 	}
 	
 	public void showOpenAddressBooks() {
-		System.out.println("Open Address Books: ");
-		for (String addressBookName : addressBooks.keySet()) {
-			System.out.println("\t" + addressBookName);
-		}
+		if (addressBooks.keySet().size() > 0) {
+			System.out.println("Open Address Books: ");
+			for (String addressBookName : addressBooks.keySet()) {
+				System.out.println("\t" + addressBookName);
+			}
+		} else
+			System.out.println("No address books are open.");
 		System.out.println();
 	}
 }
