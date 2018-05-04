@@ -71,6 +71,17 @@ public class AddressBookManager {
 		}
 	}
 
+	//TODO: Integrate this new closing mechanism
+	public void closeAddressBook (String addressBookName) throws InvalidNameException, IOException {
+		
+	}
+
+	public void closeAllAddressBooks () throws InvalidNameException, IOException {
+
+	}
+
+	// TODO: new functions to integrate ends here
+
 	public void closeAndSaveAddressBook (String addressBookName) throws InvalidNameException, IOException {
 		this.saveAddressBook(addressBookName);
 		addressBooks.remove(addressBookName);

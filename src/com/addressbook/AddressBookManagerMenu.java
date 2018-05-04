@@ -30,15 +30,17 @@ public class AddressBookManagerMenu {
 				System.out.println("                       ADDRESS BOOK MANAGER");
 				System.out.println("________________________________________________________________");
 
-				System.out.println(" 1. Create new addres book");
+				System.out.println(" 1. Create new address book");
 				System.out.println(" 2. Open an address book");
 				System.out.println(" 3. Save address book");
 				System.out.println(" 4. Save address book as");
 				System.out.println(" 5. Edit address book");
-				System.out.println(" 6. Close and save address book");
-				System.out.println(" 7. Close and save ALL address books");
+				System.out.println(" 6. Close address book");
+				System.out.println(" 7. Close ALL address books");
+				/*
 				System.out.println(" 8. Close address book without saving");
 				System.out.println(" 9. Close ALL address books without saving");
+				*/
 				System.out.println("10. Show all open address books");
 				System.out.println("11. Sort address book by name");
 				System.out.println("12. Sort address book by zip code");
@@ -80,17 +82,19 @@ public class AddressBookManagerMenu {
 					this.editAddressBook();
 					break;
 				case 6:
-					this.closeAndSaveAddressBook();
+					this.closeAddressBook();
 					break;
 				case 7:
-					this.closeAndSaveAll();
+					this.closeAll();
 					break;
+				/*
 				case 8:
 					this.closeAddressBookWithoutSaving();
 					break;
 				case 9:
 					this.closeAllWithoutSaving();
 					break;
+				*/
 				case 10:
 					addressBookManager.showOpenAddressBooks();
 					break;
@@ -220,14 +224,44 @@ public class AddressBookManagerMenu {
 
 	}
 
-	private void closeAndSaveAddressBook () {
+	private void closeAddressBook () {
 		Scanner sc = new Scanner(System.in);
-		System.out.print("Enter the name of the Address Book you want to save and close: ");
 		String addressBookName = null;
+		int option = -1;
 		try {
+			System.out.print("Enter the name of the Address Book you want to save and close: ");
 			addressBookName = sc.nextLine();
-			addressBookManager.closeAndSaveAddressBook(addressBookName);
-			System.out.println("Address Book, " + addressBookName + " saved and closed.");
+			while ((option < 1) || (option > 2)) {
+				try {
+					System.out.println("Do you want to save any unsaved changes before closing?");
+					System.out.println("1. Yes");
+					System.out.println("2. No");
+					System.out.print("\nEnter the corresponding number to select an option: ");
+					option = sc.nextInt();
+				} catch (InputMismatchException e) {
+					sc.nextLine();			// Clear the buffer
+					System.out.println("\nERROR: Entered option must be a number from 1 to 2");
+					System.out.println("Please try again.\n");
+					continue;
+				}
+				if ((option < 1) || (option > 2)) {
+					System.out.println("\nERROR: Entered option must be a number from 1 to 2");
+					System.out.println("Please try again.\n");
+				}
+			}
+			switch (option) {
+				case 1:
+					addressBookManager.closeAndSaveAddressBook(addressBookName);
+					System.out.println("Address Book, " + addressBookName + " saved and closed.");
+					break;
+				case 2:
+					addressBookManager.closeAddressBookWithoutSaving(addressBookName);
+					System.out.println("Address Book, " + addressBookName + " closed and changes discarded");
+					break;
+				default:
+					break;
+			}
+
 		} catch (InvalidNameException e) {
 			System.out.println("ERROR: " + e.getMessage());
 			System.out.println();
@@ -238,37 +272,50 @@ public class AddressBookManagerMenu {
 		} 
 	}
 
-	private void closeAddressBookWithoutSaving () {
-		
+	private void closeAll () {
 		Scanner sc = new Scanner(System.in);
-		System.out.print("Enter the name of the Address Book you want to close: ");
-		String addressBookName = null;
+		int option = -1;
 		try {
-			addressBookName = sc.nextLine();
-			addressBookManager.closeAddressBookWithoutSaving(addressBookName);
-			System.out.println("Closed address book, " + addressBookName + " without saving.");
+			while ((option < 1) || (option > 2)) {
+				try {
+					System.out.println("Do you want to save any unsaved changes before closing?");
+					System.out.println("1. Yes");
+					System.out.println("2. No");
+					System.out.print("\nEnter the corresponding number to select an option: ");
+					option = sc.nextInt();
+				} catch (InputMismatchException e) {
+					sc.nextLine();			// Clear the buffer
+					System.out.println("\nERROR: Entered option must be a number from 1 to 2");
+					System.out.println("Please try again.\n");
+					continue;
+				}
+				if ((option < 1) || (option > 2)) {
+					System.out.println("\nERROR: Entered option must be a number from 1 to 2");
+					System.out.println("Please try again.\n");
+				}
+			}
+			switch (option) {
+				case 1:
+					addressBookManager.closeAndSaveAll();
+					System.out.println("All address books saved and closed.");
+					break;
+				case 2:
+					addressBookManager.closeAllWithoutSaving();
+					System.out.println("All address book  closed and changes discarded");
+					break;
+				default:
+					break;
+			}
+
 		} catch (InvalidNameException e) {
 			System.out.println("ERROR: " + e.getMessage());
 			System.out.println();
-		}
-	}
-
-	private void closeAndSaveAll () {
-		try {
-			addressBookManager.closeAndSaveAll();
-		} catch (InvalidNameException e) {
-			System.out.println("ERROR: " + e.getMessage());
 		} catch (IOException e) {
-			System.out.println("ERROR: " + e.getMessage());
-		}
-	}
+			System.out.print("ERROR: Could not close (and save) all address book");
+			System.out.println(e.getMessage());
+			System.out.println();
+		} 
 
-	private void closeAllWithoutSaving () {
-		try {
-			addressBookManager.closeAllWithoutSaving();
-		} catch (InvalidNameException e) {
-			System.out.println("ERROR: " + e.getMessage());
-		}
 	}
 
 	private void sortAddressBookByName () {

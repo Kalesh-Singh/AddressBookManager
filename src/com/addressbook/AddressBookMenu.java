@@ -120,7 +120,7 @@ public class AddressBookMenu {
 		// TODO: Implement this.
 	}
 
-	private void showAllEntries () {
+	public void showAllEntries () {
 		System.out.println("\tEntries:\n");
 		for (Person p : addressBook.getEntries()) {
 			System.out.println(p);
