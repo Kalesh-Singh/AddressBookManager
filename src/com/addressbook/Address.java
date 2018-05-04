@@ -38,12 +38,11 @@ public class Address implements Serializable {
 	* @see InvaildAddressException
 	*/
 	public Address (int houseNumber, String street, String city, String state, String zipCode) throws InvalidAddressException {
-		this.houseNumber = houseNumber;
-		this.street = street;
-		this.city = city;
-		this.state = state;
-		this.zipCode = zipCode;
-		validateAddress();		// validate the address data
+		this.editHouseNumber(houseNumber);
+		this.editStreet(street);
+		this.editCity(city);
+		this.editState(state);
+		this.editZipCode(zipCode);
 	}
 	
 	/**
@@ -64,35 +63,32 @@ public class Address implements Serializable {
 	public String getZipCode() {
 		return zipCode;
 	}
-	
-	public void editAddress() throws InvalidAddressException {
-		try {
-			System.out.print("Enter the house number: ");
-			houseNumber = sc.nextInt();
-			sc.nextLine();
-			System.out.print("Enter the street: ");
-			street = sc.nextLine();
-			System.out.print("Enter the city: ");
-			city = sc.nextLine();
-			System.out.print("Enter the state: ");
-			state = sc.nextLine();
-			System.out.print("Enter the zip code: ");
-			zipCode = sc.nextLine();
-			validateAddress();		// validate the address data
-		} catch (InputMismatchException e) {
-			throw new InvalidAddressException("House number must be a number", sc.nextLine(), e);
-		} catch (Exception e){
-			throw e;
-		}
+
+	public void editHouseNumber(int houseNumber) throws InvalidAddressException {
+		if (houseNumber < 0)
+			throw new InvalidAddressException("House number cannot be negative", Integer.toString(houseNumber));
+		this.houseNumber = houseNumber;
 	}
 
-	private void validateAddress () throws InvalidAddressException{
-		if (houseNumber <  0)
-			throw new InvalidAddressException("House number cannot be negative", Integer.toString(houseNumber));
+	public void editStreet(String street) {
+		this.street = street;
+	}
+
+	public void editCity(String city) {
+		this.city = city;
+	}
+
+	public void editState(String state) {
+		this.state = state;
+	}
+
+	public void editZipCode(String zipCode) throws InvalidAddressException {
 		if (!isInteger(zipCode))
 			throw new InvalidAddressException("Zip code must be a number", zipCode);
 		if (Integer.parseInt(zipCode) < 0)
 			throw new InvalidAddressException("Zip code cannot be a negative number", zipCode);
+
+		this.zipCode = zipCode;
 	}
 
 	private boolean isInteger(String str) {
@@ -144,6 +140,4 @@ public class Address implements Serializable {
 			(this.state.equals(other.state)) &&
 			(this.zipCode.equals(other.zipCode));
 	}
-
-
 }
