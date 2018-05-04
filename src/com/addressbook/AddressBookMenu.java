@@ -16,15 +16,16 @@ public class AddressBookMenu {
 			int option = -1;
 			Scanner sc = new Scanner(System.in);
 			
-			while ((option < 1) || (option > 7)) {
+			while ((option < 1) || (option > 8)) {
 				System.out.println("\t\tADDRESS BOOK");
-				System.out.println("1. Add a new entry");
+				System.out.println("1. Add new entry");
 				System.out.println("2. Edit an entry");
-				System.out.println("3. Delete an entry");
-				System.out.println("4. Sort bddress book by name");
-				System.out.println("5. Sort address book by zip code");
-				System.out.println("6. Show all entries in mailing format");
-				System.out.println("7. Done (Go back)");
+				System.out.println("3. View entry details");
+				System.out.println("4. Delete an entry");
+				System.out.println("5. Sort address book by name");
+				System.out.println("6. Sort address book by zip code");
+				System.out.println("7. List all entries in mailing format");
+				System.out.println("8. Done (Go back)");
 
 				System.out.print("\nEnter the corresponding number to select an option: ");
 
@@ -32,12 +33,12 @@ public class AddressBookMenu {
 					option = sc.nextInt();
 				} catch (InputMismatchException e) {
 					sc.nextLine();			// Clear the buffer
-					System.out.println("\nERROR: Entered option must be a number from 1 to 6");
+					System.out.println("\nERROR: Entered option must be a number from 1 to 8");
 					System.out.println("Please try again.\n");
 					continue;
 				}
-				if ((option < 1) || (option > 7)) {
-					System.out.println("\nERROR: Entered option must be a number from 1 to 6");
+				if ((option < 1) || (option > 8)) {
+					System.out.println("\nERROR: Entered option must be a number from 1 to 8");
 					System.out.println("Please try again.\n");
 				}
 			}
@@ -47,22 +48,25 @@ public class AddressBookMenu {
 					this.addEntry();
 					break;
 				case 2:
-					// TODO: this.editEntry();
+					this.editEntry();
 					break;
 				case 3:
-					this.deleteEntry();
+					this.viewEntry();
 					break;
 				case 4:
-					this.sortAddressBookByName();
+					this.deleteEntry();
 					break;
 				case 5:
-					this.sortAddressBookByZipCode();
+					this.sortAddressBookByName();
 					break;
 				case 6:
-					this.showAllEntries();
+					this.sortAddressBookByZipCode();
 					break;
 				case 7:
-					System.out.println("Exiting Address Book ...");
+					this.showAllEntries();
+					break;
+				case 8:
+					System.out.println("Exiting Address Book Menu...");
 					return;		// Exit AddresBookMenu
 				default:
 					System.out.println("\nERROR: Entered option must be a number from 1 to 6");
@@ -116,10 +120,6 @@ public class AddressBookMenu {
 		System.out.println("Sorted address book by zip code.");
 	}
 
-	private void editAddressBook () {
-		// TODO: Implement this.
-	}
-
 	public void showAllEntries () {
 		System.out.println("\tEntries:\n");
 		for (Person p : addressBook.getEntries()) {
@@ -128,7 +128,44 @@ public class AddressBookMenu {
 		}
 	}
 
-			
+	private void editEntry () {
+		Scanner sc = new Scanner(System.in);
+		System.out.print("Enter the first name of the person: ");
+		String firstName = sc.nextLine();
+		System.out.print("Enter the last name of the person: ");
+		String lastName = sc.nextLine();
+		try {
+			int index = addressBook.findEntry(firstName, lastName);
+			if (index < 0)
+				System.out.println("Entry not in address book.");
+			else {
+				new EntryMenu(addressBook.getEntries().get(index)).displayMenu();
+			}
+		} catch (InvalidNameException e) {
+			System.out.println("ERROR: " + e.getMessage());
+			System.out.println();
+		}
+	}
+
+	private void viewEntry () {
+		Scanner sc = new Scanner(System.in);
+		System.out.print("Enter the first name of the person: ");
+		String firstName = sc.nextLine();
+		System.out.print("Enter the last name of the person: ");
+		String lastName = sc.nextLine();
+		try {
+			int index = addressBook.findEntry(firstName, lastName);
+			if (index < 0)
+				System.out.println("Entry not in address book.");
+			else {
+				new EntryMenu(addressBook.getEntries().get(index)).viewEntry();
+			}
+		} catch (InvalidNameException e) {
+			System.out.println("ERROR: " + e.getMessage());
+			System.out.println();
+		}
+	}
+
 
 }
 
