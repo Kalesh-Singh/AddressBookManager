@@ -48,10 +48,10 @@ public class AddressBook implements Iterable<Person>, Serializable {
 	}
 
 	/**
-	 * Returns the entry at the specified position in the address book.
+	 * Returns a list of all entries in the address book.
 	 */
-	public Person getEntry(int index) {
-		return entries.get(index);
+	public List<Person> getEntries() {
+		return entries;
 	}
 
 	/**

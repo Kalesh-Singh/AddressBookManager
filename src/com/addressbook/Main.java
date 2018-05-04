@@ -5,19 +5,14 @@ import java.io.IOException;
 
 public class Main {
 	public static void main (String[] args) {
-
+		AddressBookManager addressBookManager = new AddressBookManager();
+		AddressBookManagerMenu addressBookManagerMenu 
+			= new AddressBookManagerMenu(addressBookManager);
+		addressBookManagerMenu.displayMenu();
+		
 	}
 
-	public void addressBookMenu () {
-		System.out.println("\t\tADDRESS BOOK");
-		System.out.println("1. Add a New Entry");
-		System.out.println("2. Edit an Entry");
-		System.out.println("3. Delete an Entry");
-		System.out.println("4. Sort Address Book by Name");
-		System.out.println("5. Sort Address Book by Zip Code");
-		System.out.println("6. Done");
-	}
-
+/*
 	public void entryMenu () {
 		System.out.println("\t\tENTRY");
 		System.out.println("1. Edit Address");
@@ -35,4 +30,5 @@ public class Main {
 		System.out.println("6. Edit entire address");
 		System.out.println("7. Done");
 	}
+	*/
 }

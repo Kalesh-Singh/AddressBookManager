@@ -117,13 +117,13 @@ public class Person implements Serializable {
 		StringBuilder sb = new StringBuilder(200);
 
 		if (firstName != null)
-			sb.append("\n\nName: " + firstName);
+			sb.append(firstName);
 		if (lastName != null)
 			sb.append(" " + lastName);
 		if (address.toString().length() > 0)
-			sb.append("\nAddress: " + address.toString());
+			sb.append("\n" + address.toString());
 		if (phoneNumber.toString().length() > 0)
-			sb.append("\nPhone Number: " + phoneNumber.toString());
+			sb.append("\n" + phoneNumber.toString());
 
 		return sb.toString();
 	}

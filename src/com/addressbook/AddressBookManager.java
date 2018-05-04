@@ -26,8 +26,8 @@ public class AddressBookManager {
 	}
 
 	public AddressBook openAddressBook (String addressBookName) throws IOException, ClassNotFoundException {
-		AddressBook addressBook = addressBooks.get(addressBookName);
-		if (addressBook != null) {
+		//AddressBook addressBook = addressBooks.get(addressBookName);
+		if (!addressBooks.containsKey(addressBookName)) {
 			try {
 				ObjectInputStream objectStream =
 					new ObjectInputStream(
@@ -35,8 +35,9 @@ public class AddressBookManager {
 							Paths.get("." + addressBookName + ".dat")
 						)
 					);
-				addressBook = (AddressBook) objectStream.readObject();
+				AddressBook addressBook = (AddressBook) objectStream.readObject();
 				addressBooks.put(addressBookName, addressBook);
+				return addressBook;
 			} catch (IOException e) {
 				throw e;
 			} catch (ClassNotFoundException e) {
@@ -44,17 +45,22 @@ public class AddressBookManager {
 			}
 		} else
 			System.out.println(addressBookName + " is already open.");
-		return addressBook;
+		return addressBooks.get(addressBookName);
 	}
 	
-	public void saveAddressBook(String addressBookName) throws InvalidNameException, IOException {
+	public void saveAddressBook(String addressBookName, String... fileName) throws InvalidNameException, IOException {
+		String saveName = null;
+		if (fileName.length > 0)
+			saveName = "." + fileName[0] + ".dat";
+		else
+			saveName = "." + addressBookName + ".dat";
 		try {
 			AddressBook addressBook = addressBooks.get(addressBookName);
 			if (addressBook != null) {
 				ObjectOutputStream objectStream =
 					new ObjectOutputStream(
 						Files.newOutputStream(
-							Paths.get("." + addressBookName + ".dat")
+							Paths.get(saveName)
 						)
 					);
 				objectStream.writeObject(addressBook);
@@ -72,8 +78,10 @@ public class AddressBookManager {
 
 	public void closeAndSaveAll () throws InvalidNameException, IOException {
 		for (String name : addressBooks.keySet()) {
-			this.closeAndSaveAddressBook (name);
+			this.saveAddressBook(name);
 		}
+
+		addressBooks.clear();
 	}
 
 	public void closeAddressBookWithoutSaving (String addressBookName) throws InvalidNameException {
