@@ -17,7 +17,9 @@ public class EntryMenu  {
 			Scanner sc = new Scanner(System.in);
 	
 			while ((option < 1) || (option > 4)) {
-				System.out.println("\t\tENTRY");
+				System.out.println("________________________________________________________________");
+				System.out.println("                          ENTRY MENU");
+				System.out.println("________________________________________________________________");
 				System.out.println("1. View Entry");
 				System.out.println("2. Edit Address");
 				System.out.println("3. Edit Phone Number");
@@ -39,6 +41,7 @@ public class EntryMenu  {
 					System.out.println("Please try again.\n");
 				}
 			}
+			System.out.println("________________________________________________________________");
 
 			switch (option) {
 				case 1:
@@ -56,11 +59,12 @@ public class EntryMenu  {
 				default:
 					break;
 			}
+			System.out.println("________________________________________________________________");
 		}
 	}
 
 	public void viewEntry() {
-		System.out.println("Entry Details:");
+		System.out.println("\n\tEntry Details:");
 		System.out.println(person);
 	}
 
@@ -68,12 +72,12 @@ public class EntryMenu  {
 		new AddressMenu(person.getAddress()).displayMenu();
 	}
 
-	private void editPhoneNumber() {
+	public void editPhoneNumber() {
 		Scanner sc = new Scanner(System.in);
 		String phoneNumber = null;
 		
 		try {
-			System.out.print("Enter the phone number: ");
+			System.out.print("Enter phone number: ");
 			phoneNumber = sc.nextLine();
 			person.getPhoneNumber().editPhoneNumber(phoneNumber);
 		} catch (InvalidPhoneNumberException e) {

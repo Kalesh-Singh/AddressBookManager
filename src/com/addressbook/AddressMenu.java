@@ -15,7 +15,9 @@ public class AddressMenu {
 			int option = -1;
 			Scanner sc = new Scanner(System.in);
 			while ((option < 1) || (option > 8)) {
-				System.out.println("\t\tADDRESS MENU");
+				System.out.println("________________________________________________________________");
+				System.out.println("                          ADDRESS MENU");
+				System.out.println("________________________________________________________________");
 				System.out.println("1. View address");
 				System.out.println("2. Edit address");
 				System.out.println("3. Edit house number");
@@ -41,10 +43,16 @@ public class AddressMenu {
 				}
 			}
 
+			System.out.println("________________________________________________________________");
+
 			switch (option) {
 				case 1:
-					System.out.println("\n\tAddress:");
-					System.out.println(address);
+					if (address.toString().length() > 0) {
+						System.out.println("\n\tAddress:");
+						System.out.println(address);
+					} else 
+						System.out.println("No address available for this entry.");
+					System.out.println();
 					break;
 				case 2:
 					this.editAddress();
@@ -70,6 +78,8 @@ public class AddressMenu {
 				default:
 					break;
 			}
+
+			System.out.println("________________________________________________________________");
 		}
 	}
 

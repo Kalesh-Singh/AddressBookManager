@@ -94,6 +94,10 @@ public class AddressBook implements Iterable<Person>, Serializable {
 	public String toString() {
 		return entries.toString();
 	}
+
+	public int size() {
+		return entries.size();
+	}
 	
 }
 

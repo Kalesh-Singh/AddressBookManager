@@ -27,7 +27,7 @@ public class AddressBookManagerMenu {
 	
 			while ((option < 1) || (option > 11)) {	
 				System.out.println("________________________________________________________________");
-				System.out.println("                       ADDRESS BOOK MANAGER");
+				System.out.println("                    ADDRESS BOOK MANAGER MENU");
 				System.out.println("________________________________________________________________");
 
 				System.out.println(" 1. New");
@@ -152,223 +152,240 @@ public class AddressBookManagerMenu {
 				String fileName = datFile.getName();
 				System.out.println("\t" + fileName.substring(1, fileName.length()-4));
 			}
+
+			Scanner sc = new Scanner(System.in);
+			System.out.print("Enter name of the address book you want to open: ");
+			String addressBookName = null;
+			try {
+				addressBookName = sc.nextLine();
+				addressBookManager.openAddressBook(addressBookName);
+			} catch (ClassNotFoundException e) {
+				System.out.println("ERROR: Deserialized object does not match class.");
+				System.out.println(e.getMessage());
+				System.out.println();
+			} catch (IOException e) {
+				System.out.println("ERROR: No data found for, " + addressBookName);
+				System.out.println(e.getMessage());
+				System.out.println();
+			}
+
 		} else
 			System.out.println("No Saved Address Books");
 		System.out.println();
-
-		Scanner sc = new Scanner(System.in);
-		System.out.print("Enter name of the address book you want to open: ");
-		String addressBookName = null;
-		try {
-			addressBookName = sc.nextLine();
-			addressBookManager.openAddressBook(addressBookName);
-			System.out.println(addressBookName + " opened.");
-		} catch (ClassNotFoundException e) {
-			System.out.println("ERROR: Deserialized object does not match class.");
-			System.out.println(e.getMessage());
-			System.out.println();
-		} catch (IOException e) {
-			System.out.println("ERROR: No data found for, " + addressBookName);
-			System.out.println(e.getMessage());
-			System.out.println();
-		}
 	}
 
 	private void saveAddressBook() {
 		addressBookManager.showOpenAddressBooks();
-		Scanner sc = new Scanner(System.in);
-		String addressBookName = null;
-		try {
-			System.out.print("Enter name of the address book you want to save: ");
-			addressBookName = sc.nextLine();
-			addressBookManager.saveAddressBook(addressBookName);
-		} catch (IOException e) {
-			System.out.print("ERROR: Could not save, " + addressBookName);
-			System.out.println(e.getMessage());
-			System.out.println();
-		} catch (InvalidNameException e) {
-			System.out.println("ERROR:");
-			System.out.println("\t" + e.getMessage());
+		if (addressBookManager.getAddressBooks().size() > 0) {
+			Scanner sc = new Scanner(System.in);
+			String addressBookName = null;
+			try {
+				System.out.print("Enter name of the address book you want to save: ");
+				addressBookName = sc.nextLine();
+				addressBookManager.saveAddressBook(addressBookName);
+			} catch (IOException e) {
+				System.out.print("ERROR: Could not save, " + addressBookName);
+				System.out.println(e.getMessage());
+				System.out.println();
+			} catch (InvalidNameException e) {
+				System.out.println("ERROR:");
+				System.out.println("\t" + e.getMessage());
+			}
 		}
 	}
 	
 	private void saveAddressBookAs() {
 		addressBookManager.showOpenAddressBooks();
-		Scanner sc = new Scanner(System.in);
-		String addressBookName = null;
-		String fileName = null;
-		try {
-			System.out.print("Enter name of the address book you want to save: ");
-			addressBookName = sc.nextLine();
-			System.out.print("Enter the name you want to save the address book as: ");
-			fileName = sc.nextLine();
-			addressBookManager.saveAddressBook(addressBookName, fileName);
-			// Add the new save as to the open address books and close the previous book
-			AddressBook addressBook = addressBookManager.getAddressBooks().get(addressBookName);
-			addressBookManager.getAddressBooks().put(fileName, addressBook);
-			addressBookManager.getAddressBooks().remove(addressBookName);
+		if (addressBookManager.getAddressBooks().size() > 0) {
+			Scanner sc = new Scanner(System.in);
+			String addressBookName = null;
+			String fileName = null;
+			try {
+				System.out.print("Enter name of the address book you want to save: ");
+				addressBookName = sc.nextLine();
+				System.out.print("Enter the name you want to save the address book as: ");
+				fileName = sc.nextLine();
+				addressBookManager.saveAddressBook(addressBookName, fileName);
+				// Add the new save as to the open address books and close the previous book
+				AddressBook addressBook = addressBookManager.getAddressBooks().get(addressBookName);
+				addressBookManager.getAddressBooks().put(fileName, addressBook);
+				addressBookManager.getAddressBooks().remove(addressBookName);
 
-		} catch (IOException e) {
-			System.out.print("ERROR: Could not save, " + addressBookName);
-			System.out.println(e.getMessage());
-			System.out.println();
-		} catch (InvalidNameException e) {
-			System.out.println("ERROR:");
-			System.out.println("\t" + e.getMessage());
+			} catch (IOException e) {
+				System.out.print("ERROR: Could not save, " + addressBookName);
+				System.out.println(e.getMessage());
+				System.out.println();
+			} catch (InvalidNameException e) {
+				System.out.println("ERROR:");
+				System.out.println("\t" + e.getMessage());
+			}
 		}
-
 	}
 
 	private void closeAddressBook () {
 		addressBookManager.showOpenAddressBooks();
-		Scanner sc = new Scanner(System.in);
-		String addressBookName = null;
-		int option = -1;
-		try {
-			System.out.print("Enter name of the address book you want to close: ");
-			addressBookName = sc.nextLine();
-			while ((option < 1) || (option > 2)) {
-				try {
-					System.out.println("Do you want to save any unsaved changes before closing?");
-					System.out.println("1. Yes");
-					System.out.println("2. No");
-					System.out.print("\nEnter the corresponding number to select an option: ");
-					option = sc.nextInt();
-				} catch (InputMismatchException e) {
-					sc.nextLine();			// Clear the buffer
-					System.out.println("\nERROR: Entered option must be a number from 1 to 2");
-					System.out.println("Please try again.\n");
-					continue;
+		if (addressBookManager.getAddressBooks().size() > 0) {
+			Scanner sc = new Scanner(System.in);
+			String addressBookName = null;
+			int option = -1;
+			try {
+				System.out.print("Enter name of the address book you want to close: ");
+				addressBookName = sc.nextLine();
+				while ((option < 1) || (option > 2)) {
+					try {
+						System.out.println("Do you want to save any unsaved changes before closing?");
+						System.out.println("1. Yes");
+						System.out.println("2. No");
+						System.out.print("\nEnter the corresponding number to select an option: ");
+						option = sc.nextInt();
+					} catch (InputMismatchException e) {
+						sc.nextLine();			// Clear the buffer
+						System.out.println("\nERROR: Entered option must be a number from 1 to 2");
+						System.out.println("Please try again.\n");
+						continue;
+					}
+					if ((option < 1) || (option > 2)) {
+						System.out.println("\nERROR: Entered option must be a number from 1 to 2");
+						System.out.println("Please try again.\n");
+					}
 				}
-				if ((option < 1) || (option > 2)) {
-					System.out.println("\nERROR: Entered option must be a number from 1 to 2");
-					System.out.println("Please try again.\n");
+				switch (option) {
+					case 1:
+						addressBookManager.closeAndSaveAddressBook(addressBookName);
+						System.out.println("Address Book, " + addressBookName + " saved and closed.");
+						break;
+					case 2:
+						addressBookManager.closeAddressBookWithoutSaving(addressBookName);
+						System.out.println("Address Book, " + addressBookName + " closed and changes discarded");
+						break;
+					default:
+						break;
 				}
-			}
-			switch (option) {
-				case 1:
-					addressBookManager.closeAndSaveAddressBook(addressBookName);
-					System.out.println("Address Book, " + addressBookName + " saved and closed.");
-					break;
-				case 2:
-					addressBookManager.closeAddressBookWithoutSaving(addressBookName);
-					System.out.println("Address Book, " + addressBookName + " closed and changes discarded");
-					break;
-				default:
-					break;
-			}
 
-		} catch (InvalidNameException e) {
-			System.out.println("ERROR: " + e.getMessage());
-			System.out.println();
-		} catch (IOException e) {
-			System.out.print("ERROR: Could not close and save address book, " + addressBookName);
-			System.out.println(e.getMessage());
-			System.out.println();
-		} 
+			} catch (InvalidNameException e) {
+				System.out.println("ERROR: " + e.getMessage());
+				System.out.println();
+			} catch (IOException e) {
+				System.out.print("ERROR: Could not close and save address book, " + addressBookName);
+				System.out.println(e.getMessage());
+				System.out.println();
+			} 
+		}
 	}
 
 	private void closeAll () {
-		Scanner sc = new Scanner(System.in);
-		int option = -1;
-		try {
-			while ((option < 1) || (option > 2)) {
-				try {
-					System.out.println("Do you want to save any unsaved changes before closing?");
-					System.out.println("1. Yes");
-					System.out.println("2. No");
-					System.out.print("\nEnter the corresponding number to select an option: ");
-					option = sc.nextInt();
-				} catch (InputMismatchException e) {
-					sc.nextLine();			// Clear the buffer
-					System.out.println("\nERROR: Entered option must be a number from 1 to 2");
-					System.out.println("Please try again.\n");
-					continue;
+		if (addressBookManager.getAddressBooks().size() > 0) {
+			Scanner sc = new Scanner(System.in);
+			int option = -1;
+			try {
+				while ((option < 1) || (option > 2)) {
+					try {
+						System.out.println("Do you want to save any unsaved changes before closing?");
+						System.out.println("1. Yes");
+						System.out.println("2. No");
+						System.out.print("\nEnter the corresponding number to select an option: ");
+						option = sc.nextInt();
+					} catch (InputMismatchException e) {
+						sc.nextLine();			// Clear the buffer
+						System.out.println("\nERROR: Entered option must be a number from 1 to 2");
+						System.out.println("Please try again.\n");
+						continue;
+					}
+					if ((option < 1) || (option > 2)) {
+						System.out.println("\nERROR: Entered option must be a number from 1 to 2");
+						System.out.println("Please try again.\n");
+					}
 				}
-				if ((option < 1) || (option > 2)) {
-					System.out.println("\nERROR: Entered option must be a number from 1 to 2");
-					System.out.println("Please try again.\n");
+				switch (option) {
+					case 1:
+						addressBookManager.closeAndSaveAll();
+						System.out.println("All address books saved and closed.");
+						break;
+					case 2:
+						addressBookManager.closeAllWithoutSaving();
+						System.out.println("All address book  closed and changes discarded");
+						break;
+					default:
+						break;
 				}
-			}
-			switch (option) {
-				case 1:
-					addressBookManager.closeAndSaveAll();
-					System.out.println("All address books saved and closed.");
-					break;
-				case 2:
-					addressBookManager.closeAllWithoutSaving();
-					System.out.println("All address book  closed and changes discarded");
-					break;
-				default:
-					break;
-			}
 
-		} catch (InvalidNameException e) {
-			System.out.println("ERROR: " + e.getMessage());
+			} catch (InvalidNameException e) {
+				System.out.println("ERROR: " + e.getMessage());
+				System.out.println();
+			} catch (IOException e) {
+				System.out.print("ERROR: Could not close (and save) all address book");
+				System.out.println(e.getMessage());
+				System.out.println();
+			} 
+		} else {
+			System.out.println("No address books are open.");
 			System.out.println();
-		} catch (IOException e) {
-			System.out.print("ERROR: Could not close (and save) all address book");
-			System.out.println(e.getMessage());
-			System.out.println();
-		} 
-
+		}
 	}
 
 	private void sortAddressBookByName () {
 		addressBookManager.showOpenAddressBooks();
-		Scanner sc = new Scanner(System.in);		
-		System.out.print("Enter name of the address book to sort by name: ");
-		String addressBookName = sc.nextLine();
-		AddressBook addressBook = addressBookManager.getAddressBooks().get(addressBookName);
-		if (addressBook == null)
-			System.out.println(addressBookName + ", is not open.");
-		else {
-			addressBook.sortByName();
-			System.out.println(addressBookName + " sorted by name.");
+		if (addressBookManager.getAddressBooks().size() > 0) {
+			Scanner sc = new Scanner(System.in);		
+			System.out.print("Enter name of the address book to sort by name: ");
+			String addressBookName = sc.nextLine();
+			AddressBook addressBook = addressBookManager.getAddressBooks().get(addressBookName);
+			if (addressBook == null)
+				System.out.println(addressBookName + ", is not open.");
+			else {
+				addressBook.sortByName();
+				System.out.println(addressBookName + " sorted by name.");
+			}
 		}				
 	}
 
 	private void sortAddressBookByZipCode () {
 		addressBookManager.showOpenAddressBooks();
-		Scanner sc = new Scanner(System.in);		
-		System.out.print("Enter name of the address book to sort by zip code: ");
-		String addressBookName = sc.nextLine();
-		AddressBook addressBook = addressBookManager.getAddressBooks().get(addressBookName);
-		if (addressBook == null)
-			System.out.println(addressBookName + ", is not open.");
-		else {
-			addressBook.sortByZipCode();
-			System.out.println(addressBookName + " sorted by zip code.");
-		}				
+		if (addressBookManager.getAddressBooks().size() > 0) {
+			Scanner sc = new Scanner(System.in);		
+			System.out.print("Enter name of the address book to sort by zip code: ");
+			String addressBookName = sc.nextLine();
+			AddressBook addressBook = addressBookManager.getAddressBooks().get(addressBookName);
+			if (addressBook == null)
+				System.out.println(addressBookName + ", is not open.");
+			else {
+				addressBook.sortByZipCode();
+				System.out.println(addressBookName + " sorted by zip code.");
+			}	
+		}			
 	}
 
 	private void editAddressBook () {
 		addressBookManager.showOpenAddressBooks();
-		Scanner sc = new Scanner(System.in);
-		System.out.println("Enter name of the address book you want to edit: ");
-		String addressBookName = sc.nextLine();
-		AddressBook addressBook = addressBookManager.getAddressBooks().get(addressBookName);
-		if (addressBook == null)
-			System.out.println(addressBookName + ", is not open.");
-		else {
-			System.out.println("Editing " + addressBookName + " : ");
-			new AddressBookMenu(addressBook).displayMenu();
+		if (addressBookManager.getAddressBooks().size() > 0) {
+			Scanner sc = new Scanner(System.in);
+			System.out.println("Enter name of the address book you want to edit: ");
+			String addressBookName = sc.nextLine();
+			AddressBook addressBook = addressBookManager.getAddressBooks().get(addressBookName);
+			if (addressBook == null)
+				System.out.println(addressBookName + ", is not open.");
+			else {
+				System.out.println("Editing " + addressBookName + " : ");
+				new AddressBookMenu(addressBook).displayMenu();
+			}
 		}
 	}
 
 	private void viewAddressBook () {
 		addressBookManager.showOpenAddressBooks();
-		Scanner sc = new Scanner(System.in);
-		System.out.println("Enter name of the address book you want to view: ");
-		String addressBookName = sc.nextLine();
-		AddressBook addressBook = addressBookManager.getAddressBooks().get(addressBookName);
-		if (addressBook == null)
-			System.out.println("No such address book is open: " + addressBookName);
-		else {
-			System.out.println();
-			System.out.println("ADDRESS BOOK: " + addressBookName);
-			System.out.println();
-			new AddressBookMenu(addressBook).showAllEntries();
+		if (addressBookManager.getAddressBooks().size() > 0) {
+			Scanner sc = new Scanner(System.in);
+			System.out.println("Enter name of the address book you want to view: ");
+			String addressBookName = sc.nextLine();
+			AddressBook addressBook = addressBookManager.getAddressBooks().get(addressBookName);
+			if (addressBook == null)
+				System.out.println("No such address book is open: " + addressBookName);
+			else {
+				System.out.println();
+				System.out.println("ADDRESS BOOK: " + addressBookName);
+				System.out.println();
+				new AddressBookMenu(addressBook).showAllEntries();
+			}
 		}
 	}
 

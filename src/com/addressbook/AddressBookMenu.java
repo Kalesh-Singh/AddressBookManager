@@ -17,7 +17,9 @@ public class AddressBookMenu {
 			Scanner sc = new Scanner(System.in);
 			
 			while ((option < 1) || (option > 8)) {
-				System.out.println("\t\tADDRESS BOOK");
+				System.out.println("________________________________________________________________");
+				System.out.println("                      ADDRESS BOOK MENU");
+				System.out.println("________________________________________________________________");
 				System.out.println("1. Add new entry");
 				System.out.println("2. Edit an entry");
 				System.out.println("3. View entry details");
@@ -42,6 +44,8 @@ public class AddressBookMenu {
 					System.out.println("Please try again.\n");
 				}
 			}
+
+			System.out.println("________________________________________________________________");
 
 			switch (option) {
 				case 1:
@@ -73,6 +77,7 @@ public class AddressBookMenu {
 					System.out.println("Please try again.\n");
 					break;
 			}
+			System.out.println("________________________________________________________________");	
 		}
 	}
 
@@ -84,7 +89,8 @@ public class AddressBookMenu {
 		String lastName = sc.nextLine();
 		try {
 			Person person = new Person(firstName, lastName);
-			new AddressMenu(person.getAddress()).editAddress();			
+			new AddressMenu(person.getAddress()).editAddress();
+			new EntryMenu(person).editPhoneNumber();			
 			addressBook.addEntry(person);
 		} catch (InvalidNameException e) {
 			System.out.println("ERROR: " + e.getMessage());
@@ -93,21 +99,26 @@ public class AddressBookMenu {
 	}
 
 	private void deleteEntry() {
-		Scanner sc = new Scanner(System.in);
-		System.out.print("Enter the first name of the person: ");
-		String firstName = sc.nextLine();
-		System.out.print("Enter the last name of the person: ");
-		String lastName = sc.nextLine();
-		try {
-			int index = addressBook.findEntry(firstName, lastName);
-			if (index < 0)
-				System.out.println("Entry not in address book.");
-			else {
-				addressBook.deleteEntry(index);
-				System.out.println("Deleted entry.");
+		if (addressBook.size() > 0) {
+			Scanner sc = new Scanner(System.in);
+			System.out.print("Enter the first name of the person: ");
+			String firstName = sc.nextLine();
+			System.out.print("Enter the last name of the person: ");
+			String lastName = sc.nextLine();
+			try {
+				int index = addressBook.findEntry(firstName, lastName);
+				if (index < 0)
+					System.out.println("Entry not in address book.");
+				else {
+					addressBook.deleteEntry(index);
+					System.out.println("Deleted entry.");
+				}
+			} catch (InvalidNameException e) {
+				System.out.println("ERROR: " + e.getMessage());
+				System.out.println();
 			}
-		} catch (InvalidNameException e) {
-			System.out.println("ERROR: " + e.getMessage());
+		} else {
+			System.out.println("Address book is empty.");
 			System.out.println();
 		}
 	}
@@ -123,51 +134,63 @@ public class AddressBookMenu {
 	}
 
 	public void showAllEntries () {
-		System.out.println("\tEntries:\n");
-		for (Person p : addressBook.getEntries()) {
-			System.out.println(p);
-			System.out.println();
-		}
+		if (addressBook.getEntries().size() > 0) {
+			System.out.println("\tEntries:\n");
+			for (Person p : addressBook.getEntries()) {
+				System.out.println(p);
+				System.out.println();
+			}
+		} else
+			System.out.println("This address book is empty.");
+		System.out.println();
 	}
 
 	private void editEntry () {
-		Scanner sc = new Scanner(System.in);
-		System.out.print("Enter the first name of the person: ");
-		String firstName = sc.nextLine();
-		System.out.print("Enter the last name of the person: ");
-		String lastName = sc.nextLine();
-		try {
-			int index = addressBook.findEntry(firstName, lastName);
-			if (index < 0)
-				System.out.println("Entry not in address book.");
-			else {
-				new EntryMenu(addressBook.getEntries().get(index)).displayMenu();
+		if (addressBook.size() > 0) {
+			Scanner sc = new Scanner(System.in);
+			System.out.print("Enter the first name of the person: ");
+			String firstName = sc.nextLine();
+			System.out.print("Enter the last name of the person: ");
+			String lastName = sc.nextLine();
+			try {
+				int index = addressBook.findEntry(firstName, lastName);
+				if (index < 0)
+					System.out.println("Entry not in address book.");
+				else {
+					new EntryMenu(addressBook.getEntries().get(index)).displayMenu();
+				}
+			} catch (InvalidNameException e) {
+				System.out.println("ERROR: " + e.getMessage());
+				System.out.println();
 			}
-		} catch (InvalidNameException e) {
-			System.out.println("ERROR: " + e.getMessage());
+		} else {
+			System.out.println("Address book is empty.");
 			System.out.println();
 		}
 	}
 
 	private void viewEntry () {
-		Scanner sc = new Scanner(System.in);
-		System.out.print("Enter the first name of the person: ");
-		String firstName = sc.nextLine();
-		System.out.print("Enter the last name of the person: ");
-		String lastName = sc.nextLine();
-		try {
-			int index = addressBook.findEntry(firstName, lastName);
-			if (index < 0)
-				System.out.println("Entry not in address book.");
-			else {
-				new EntryMenu(addressBook.getEntries().get(index)).viewEntry();
+		if (addressBook.size() > 0) {
+			Scanner sc = new Scanner(System.in);
+			System.out.print("Enter the first name of the person: ");
+			String firstName = sc.nextLine();
+			System.out.print("Enter the last name of the person: ");
+			String lastName = sc.nextLine();
+			try {
+				int index = addressBook.findEntry(firstName, lastName);
+				if (index < 0)
+					System.out.println("Entry not in address book.");
+				else {
+					new EntryMenu(addressBook.getEntries().get(index)).viewEntry();
+				}
+			} catch (InvalidNameException e) {
+				System.out.println("ERROR: " + e.getMessage());
+				System.out.println();
 			}
-		} catch (InvalidNameException e) {
-			System.out.println("ERROR: " + e.getMessage());
+		} else {
+			System.out.println("Address book is empty.");
 			System.out.println();
 		}
 	}
-
-
 }
 

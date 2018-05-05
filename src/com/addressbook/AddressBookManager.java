@@ -26,7 +26,6 @@ public class AddressBookManager {
 	}
 
 	public AddressBook openAddressBook (String addressBookName) throws IOException, ClassNotFoundException {
-		//AddressBook addressBook = addressBooks.get(addressBookName);
 		if (!addressBooks.containsKey(addressBookName)) {
 			try {
 				ObjectInputStream objectStream =
@@ -37,6 +36,7 @@ public class AddressBookManager {
 					);
 				AddressBook addressBook = (AddressBook) objectStream.readObject();
 				addressBooks.put(addressBookName, addressBook);
+				System.out.println(addressBookName + " opened.");
 				return addressBook;
 			} catch (IOException e) {
 				throw e;
