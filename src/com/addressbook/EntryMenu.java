@@ -64,11 +64,11 @@ public class EntryMenu  {
 		System.out.println(person);
 	}
 
-	public void editAddress() {
-		// TODO: Implement the address menu
+	private void editAddress() {
+		new AddressMenu(person.getAddress()).displayMenu();
 	}
 
-	public void editPhoneNumber() {
+	private void editPhoneNumber() {
 		Scanner sc = new Scanner(System.in);
 		String phoneNumber = null;
 		
@@ -82,10 +82,3 @@ public class EntryMenu  {
 		}
 	}
 }
-
-
-
-
-
-
-

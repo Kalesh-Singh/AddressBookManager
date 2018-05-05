@@ -93,6 +93,7 @@ public class AddressBookManagerMenu {
 					this.closeAll();
 					break;
 				case 11:
+					this.closeAll();
 					System.out.println("Program terminated successfully.");
 					System.exit(0);
 					break;
@@ -144,11 +145,15 @@ public class AddressBookManagerMenu {
 			}
 		});
 
-		System.out.println("Saved Address Books:");
-		for (File datFile : files) {
-			String fileName = datFile.getName();
-			System.out.println("\t" + fileName.substring(1, fileName.length()-4));
-		}
+
+		if (files.length > 0) {
+			System.out.println("Saved Address Books:");
+			for (File datFile : files) {
+				String fileName = datFile.getName();
+				System.out.println("\t" + fileName.substring(1, fileName.length()-4));
+			}
+		} else
+			System.out.println("No Saved Address Books");
 		System.out.println();
 
 		Scanner sc = new Scanner(System.in);

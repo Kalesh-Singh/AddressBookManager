@@ -23,6 +23,10 @@ public class AddressBook implements Iterable<Person>, Serializable {
 		entries.add(new Person(firstName, lastName));
 	}
 
+	public void addEntry (Person person) {
+		entries.add(person);
+	}
+
 	/**
 	 * Returns the index of the first occurrence of the specified entry in the address book, or -1 if the address book does not contain the entry.
 	 */

@@ -83,7 +83,9 @@ public class AddressBookMenu {
 		System.out.print("Enter the last name of the person: ");
 		String lastName = sc.nextLine();
 		try {
-			addressBook.addEntry(firstName, lastName);
+			Person person = new Person(firstName, lastName);
+			new AddressMenu(person.getAddress()).editAddress();			
+			addressBook.addEntry(person);
 		} catch (InvalidNameException e) {
 			System.out.println("ERROR: " + e.getMessage());
 			System.out.println();

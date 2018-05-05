@@ -116,9 +116,9 @@ public class PhoneNumber implements Serializable {
 		StringBuilder sb = new StringBuilder(20);
 
 		if (countryCode != null)
-			sb.append("+" + countryCode);
+			sb.append("+" + countryCode + " ");
 		if (areaCode != null)
-			sb.append(" (" + areaCode + ")");
+			sb.append("(" + areaCode + ")");
 		if (exchangeNum != null)
 			sb.append(" " + exchangeNum);
 		if (subscriberNum != null)

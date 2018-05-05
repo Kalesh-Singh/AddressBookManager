@@ -113,11 +113,11 @@ public class Address implements Serializable {
 		if (street.length() > 0)
 			sb.append(" " + street);
 		if (city.length() > 0)
-			sb.append(", " + city);
+			sb.append("\n" + city);
 		if (state.length() > 0)
-			sb.append(", " + state);
+			sb.append("\n" + state);
 		if (zipCode.length() > 0)
-			sb.append(" " + zipCode);
+			sb.append("\n" + zipCode);
 
 		return sb.toString();
 	}
