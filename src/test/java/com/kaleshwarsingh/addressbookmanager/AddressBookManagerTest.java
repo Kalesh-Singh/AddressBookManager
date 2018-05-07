@@ -60,6 +60,4 @@ public class AddressBookManagerTest {
 
 		Assert.assertNotEquals(null, addressBookManager.getAddressBooks().get("addressBookToOpen"));
 	}
-
-
 }

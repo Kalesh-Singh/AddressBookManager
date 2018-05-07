@@ -44,6 +44,26 @@ public class Address implements Serializable {
 		this.editState(state);
 		this.editZipCode(zipCode);
 	}
+	
+	/**
+	 * Edits the Address to the address represented by the integer houseNumber and the strings street, city, state, and zipCode.
+	 * @param houseNumber					An int representing the house number.
+	 * @param street						A String representing the street.
+	 * @param city							A String represnting the city.
+	 * @param state							A String representing the state.
+	 * @param zipCode						An String representing the zip code.
+	 * @exception InvalidAddressException	On invalid address entry.
+	 * @see InvaildAddressException
+	 */
+
+	public void editAddress (int houseNumber, String street, String city, String state, String zipCode) throws InvalidAddressException {
+		this.editHouseNumber(houseNumber);
+		this.editStreet(street);
+		this.editCity(city);
+		this.editState(state);
+		this.editZipCode(zipCode);
+	}
+
 		
 	/**
 	 * Returns the zip code of the adddress.

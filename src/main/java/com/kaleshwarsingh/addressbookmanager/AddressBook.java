@@ -42,6 +42,15 @@ public class AddressBook implements Iterable<Person>, Serializable {
 	}
 
 	/**
+	 * Returns the entry at the index speified by the integer index in the address book.
+	 * @param index		An integer specifiying the index of the entry to get.
+	 * @return The entry at the specified index in the address book.
+	 */
+	public Person getEntry (int index) {
+		 return entries.get(index);
+	}
+
+	/**
 	 * Returns the index of the first occurrence of the entry with matching first name and last name in the address book, or -1 if no matching entry is found.
 	 * @param firstName					A String representing the first name of the entry to be found.
 	 * @param lastName					A String representing the last name of the entry to be found.
