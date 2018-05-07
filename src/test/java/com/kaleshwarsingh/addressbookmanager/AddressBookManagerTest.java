@@ -49,4 +49,17 @@ public class AddressBookManagerTest {
 
 		addressBookManager.saveAddressBook("AddressBook2");
 	}
+	
+	@Test
+	public void canOpenSavedAddressBook () throws InvalidNameException, IOException, ClassNotFoundException {
+		AddressBookManager addressBookManager = new AddressBookManager();
+		addressBookManager.createAddressBook("addressBookToOpen");
+		addressBookManager.closeAndSaveAddressBook("addressBookToOpen");
+
+		addressBookManager.openAddressBook("addressBookToOpen");
+
+		Assert.assertNotEquals(null, addressBookManager.getAddressBooks().get("addressBookToOpen"));
+	}
+
+
 }
