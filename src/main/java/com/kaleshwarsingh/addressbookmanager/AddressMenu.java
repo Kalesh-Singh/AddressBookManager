@@ -3,13 +3,24 @@ package com.kaleshwarsingh.addressbookmanager;
 import java.util.Scanner;
 import java.util.InputMismatchException;
 
+
+/**
+ * Display the options available to the user for an Address and takes input from the user, which specifies the desired option.
+ */
 public class AddressMenu {
 	private Address address;
 
+	/**
+	 * Constructs an AddressMenu for the Address specified by the parameter address.
+	 * @param address		A reference to the Address for which the AddressMenu will be created.
+	 */
 	public AddressMenu(Address address) {
 		this.address = address;
 	}
 
+	/**
+	 *  Continuouse displays the address menu. Gets the option selected from standard input and performs the appropriate action. Actions include viewing the address, editing the entire address, editing a specific field of the address, and exiting the address menu.
+	 */
 	public void displayMenu() {
 		while (true) {
 			int option = -1;
@@ -141,7 +152,10 @@ public class AddressMenu {
 		}
 		return 0;
 	}
-
+	
+	/** 
+	 * Gets data from standard input for and updates the address fields accordingly.
+	 */
 	public void editAddress () {
 		if (this.editHouseNumber() < 0)
 			return;

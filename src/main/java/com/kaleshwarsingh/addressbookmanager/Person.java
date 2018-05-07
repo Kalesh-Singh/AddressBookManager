@@ -2,14 +2,13 @@ package com.kaleshwarsingh.addressbookmanager;
 
 import java.io.Serializable;
 
-/**
-<h1>Person</h1>
-<p>The Person provides a convenient way of representing a Person with first and last names, address and phone number.</p>
-*
-* @author	Kaleshwar Singh
-* @version	1.0
-* @since	2018-04-30
-*/
+/**>
+ *Provides a convenient way of representing a Person with first and last names, address and phone number.
+ *
+ * @author	Kaleshwar Singh
+ * @version	1.0
+ * @since	2018-04-30
+ */
 
 public class Person implements Serializable {
 	private String firstName = null;
@@ -18,7 +17,7 @@ public class Person implements Serializable {
 	PhoneNumber phoneNumber = null;
 
 	/**
-	* This is the default constructor of the Person class.
+	* Constructs an empty Person.
 	*/
 	public Person () {
 		address = new Address();
@@ -26,12 +25,12 @@ public class Person implements Serializable {
 	}
 	
 	/**
-	* This constructor creates and initializes an instance of the Person class.
-	* @param firstName					A String representing the person's first name.
-	* @param lastName					A String representing the person's last name.
-	* @exception InvalidNameException	On empty first name entry.
-	* @see								InvalidNameException
-	*/
+	 * Constructs and initializes a Person to the person represented by the strings firstName and lastName.
+	 * @param firstName					A String representing the person's first name.
+	 * @param lastName					A String representing the person's last name.
+	 * @exception InvalidNameException	On empty first name received.
+	 * @see								InvalidNameException
+	 */
 	public Person (String firstName, String lastName) throws InvalidNameException {
 		this();
 		if (firstName.length() == 0)
@@ -41,77 +40,86 @@ public class Person implements Serializable {
 	}
 
 	/**
-	* This constructor creates and initializes an instance of the Person class.
-	* @param firstName					A String representing the person's first name.
-	* @param lastName					A String representing the person's last name.
-	* @param address	`				An instance of Address representing the person's address.
-	* @exception InvalidNameException	On empty first name entry.
-	* @see								InvalidNameException
-	*/
+	 * Constructs and initializes a Person to the person represented by the strings firstName and lastName and the Address address.
+	 * @param firstName					A String representing the person's first name.
+	 * @param lastName					A String representing the person's last name.
+	 * @param address	`				An instance of Address representing the person's address.
+	 * @exception InvalidNameException	On empty first name entry.
+	 * @see								InvalidNameException
+	 */
 	public Person (String firstName, String lastName, Address address) throws InvalidNameException {
 		this(firstName, lastName);
 		this.address = address;
 	}
 
 	/**
-	* This constructor creates and initializes an instance of the Person class.
-	* @param firstName					A String representing the person's first name.
-	* @param lastName					A String representing the person's last name.
-	* @param phoneNumber				An instance of PhoneNumber represesnting the person's phone number.
-	* @exception InvalidNameException	On empty first name entry.
-	* @see								InvalidNameException
-	*/
+	 * Constructs and initializes a Person to the person represented by the strings firstName and lastName and the PhoneNumber phoneNumber.
+	 * @param firstName					A String representing the person's first name.
+	 * @param lastName					A String representing the person's last name.
+	 * @param phoneNumber				An instance of PhoneNumber represesnting the person's phone number.
+	 * @exception InvalidNameException	On empty first name entry.
+	 * @see								InvalidNameException
+	 */
 	public Person (String firstName, String lastName, PhoneNumber phoneNumber) throws InvalidNameException {
 		this(firstName, lastName);
 		this.phoneNumber = phoneNumber;
 	}
 
 	/**
-	* This constructor creates and initializes an instance of the Person class.
-	* @param firstName					A String representing the person's first name.
-	* @param lastName					A String representing the person's last name.
-	* @param address	`				An instance of Address representing the person's address.
-	* @param phoneNumber				An instance of PhoneNumber representing the person's phone number.
-	* @exception InvalidNameException	On empty first name entry.
-	* @see								InvalidNameException
-	*/
+	 * Constructs and initializes a Person to the person represented by the strings firstName and lastName, the Address address, and the PhoneNumber phoneNumber.
+	 * @param firstName					A String representing the person's first name.
+	 * @param lastName					A String representing the person's last name.
+	 * @param address	`				An instance of Address representing the person's address.
+	 * @param phoneNumber				An instance of PhoneNumber representing the person's phone number.
+	 * @exception InvalidNameException	On empty first name entry.
+	 * @see								InvalidNameException
+	 */
 	public Person (String firstName, String lastName, Address address, PhoneNumber phoneNumber) throws InvalidNameException {
 		this(firstName, lastName, address);
 		this.phoneNumber = phoneNumber;
 	}
 
 	/**
-	* Returns the person's first name.
-	*/
+	 * Returns the first name of the Person.
+	 * @return A string representation of the Person's first name.
+	 */
 	public String getFirstName () {
 		return firstName;
 	}
 	
 	/**
-	* Returns the person's last name.
-	*/
+	 * Returns the last name of the Person.
+	 * @return A string representation of the Person's last name.
+	 */
 	public String getLastName () {
 		return lastName;
 	}
 
 	/**
-	* Returns the person's address.
-	*/
+	 * Returns the address of the Person.
+	 * @return An Address representation of the Person's address.
+	 */
 	public Address getAddress () {
 		return address;
 	}
 
 	/**
-	* Returns the person's phone number.
-	*/
+	 * Returns the phone number of the Person.
+	 * @return A PhoneNumber representation of the Person's phone number.
+	 */
 	public PhoneNumber getPhoneNumber() {
 		return phoneNumber;
 	}
 	
 	/**
-	* Convert the Person into its mailing format String  representation.
-	* @return A String representation of the Person instance.
-	*/
+ 	 * Converts the Person in to a String representation in the format:<br>
+	 * &emsp;Firstname Lastname<br>
+	 * &emsp;House Number<br>
+	 * &emsp;City<br>
+	 * &emsp;State<br>
+	 * &emsp;Zip code<br>
+	 * @return A String representation of the Person.
+	 */
 	@Override
 	public String toString () {
 		StringBuilder sb = new StringBuilder(200);
@@ -128,8 +136,10 @@ public class Person implements Serializable {
 		return sb.toString();
 	}
 
-	/* This method provides a way of comparing 2 person's to check if they are the same.
-	 * @return A boolean indicating whether the persons are the same.
+	/**
+	 * Compares this person to the specified object o.
+	 * @param o An object to be compared with for equality.
+	 * @return A boolean indicating whether the person and object are equal.
 	 */
 	@Override
 	public boolean equals(Object o) {

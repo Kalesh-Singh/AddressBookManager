@@ -8,6 +8,9 @@ import java.util.regex.Pattern;
 import java.io.File;
 import java.io.FilenameFilter;
 
+/**
+ * Displays the options available to the user for an AddressBookManager and takes input from the user which specifies the desired option.
+ */
 public class AddressBookManagerMenu {
 
 	private AddressBookManager addressBookManager;
@@ -15,11 +18,18 @@ public class AddressBookManagerMenu {
 	// Regular expression to validate file name (address book name)
 	private static final Pattern p = Pattern.compile("^[0-9a-zA-Z_\\-.]+$");
 	private Matcher m;
-
+	
+	/**
+	 * Constructs an AddressBookManagerMenu for the AddressBookManger specified by the parameter addressBookManagerMenu.
+	 * @param addressBookManager	A reference to the AddressBookManager for which the AddressBookManagerMenu will be created.
+	 */
 	public AddressBookManagerMenu (AddressBookManager addressBookManager) {
 		this.addressBookManager = addressBookManager;
 	}
-	
+
+	/**
+	 * Continuously displays the address book manager menu. Gets teh option selected from standard input and performs the appropriate action. Actions include creating anew address book, opening a saved address book, viewing an open address book, editing an open address book, sorting an open address book, saving an open address book, closing an open address book, and exiting the addressbook manager menu.
+	 */
 	public void displayMenu () {
 		while (true) {		
 			int option = -1;

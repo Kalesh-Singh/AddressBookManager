@@ -3,14 +3,24 @@ package com.kaleshwarsingh.addressbookmanager;
 import java.util.Scanner;
 import java.util.InputMismatchException;
 
+/**
+ * Displays the options available to the user for a Person (entry) and takes input from the user, which specifies the desired option.
+ */
 public class EntryMenu  {
 
 	private Person person;
 
+	/**
+	 * Constructs an EntryMenu for the Person specified by the parameter address.
+	 * @param person	A reference to the Person for which the EntryMenu will be created.
+	 */
 	public EntryMenu (Person person) {
 		this.person = person;
 	}
 
+	/**
+	 *Continuously displays the entry menu. Gets the option selected from standard input and performs the appropriate action. Actions include viewing the entry, editing the address of the entry, editing the phone number of the entry, and exiting the entry menu.
+	 */
 	public void displayMenu () {
 		while (true) {
 			int option = -1;

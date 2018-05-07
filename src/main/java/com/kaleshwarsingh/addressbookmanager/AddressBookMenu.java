@@ -3,14 +3,24 @@ package com.kaleshwarsingh.addressbookmanager;
 import java.util.Scanner;
 import java.util.InputMismatchException;
 
+/**
+ * Displays the options available to the user for an AddressBook and takes input from the user which specifies the desired option.
+ */
 public class AddressBookMenu {
 
 	private AddressBook addressBook;
-	
+
+	/**
+	 * Constructs an AddressBookMenu for the AddressBook specified by the parameter addressBook.
+	 * @param addressBook	A reference to the AddressBook for which the AddressBookMenu will be created.
+	 */
 	public AddressBookMenu (AddressBook addressBook) {
 		this.addressBook = addressBook;
 	}
 
+	/**
+	 * Continuously displays the address book menu. Gets the option selected from standard input and performs the appropriate action. Actions include adding a new entry, editing an entry, viewing an entry, deleting an entry, sorting the address book, listing all entries in the address book, and exiting the address book menu.
+	 */
 	public void displayMenu () {
 		while (true) {
 			int option = -1;

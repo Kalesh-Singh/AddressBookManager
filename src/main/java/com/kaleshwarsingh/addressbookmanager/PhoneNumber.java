@@ -5,15 +5,13 @@ import java.util.regex.Pattern;
 import java.io.Serializable;
 
 /**
-* <h1>PhoneNumber</h1>
-* <p>The PhoneNumber class provides convenient way of representing standard 10-digit phone numbers, regardless of the way the phone number is entered.</p>
-*
-* @author	Kaleshwar Singh
-* @version	1.0
-* @since	2014-03-28
-*/
-
-
+ * Provides convenient way of representing a standard 10-digit phone number, regardless of the way the phone number is entered.</p>
+ *
+ * @author	Kaleshwar Singh
+ * @version	1.0
+ * @since	2014-03-28
+ * @see		InvalidPhoneNumberException
+ */
 public class PhoneNumber implements Serializable {
 	private String countryCode = null;
 	private String areaCode = null;
@@ -29,12 +27,12 @@ public class PhoneNumber implements Serializable {
 	private Matcher m;
 	
 	/**
-	* This constructor is used to create and initialize instance of the PhoneNumber class.
+	* Constructs an empty PhoneNumber.
 	*/
 	public PhoneNumber() { }							// Default constructor
 
 	/**
-	* This constructor is used to create and initialize instance of the PhoneNumber class.
+	* Constructs and intializes a PhoneNumber to that indicated by the string phoneNumber.
 	*
 	* It would accept the following examples and much more,
 	* regardless of the way the phone number is entered:
@@ -64,7 +62,7 @@ public class PhoneNumber implements Serializable {
 	}
 
 	/**
-	* This method is used to edit an intance of the PhoneNumber class.
+	* Edits a PhoneNumber by replacing the old phone number with the phone number represented by the string phoneNumber.
 	*
 	* It would accept the following examples and much more, 
 	* regardless of the way the phone number is entered:
@@ -90,7 +88,6 @@ public class PhoneNumber implements Serializable {
 	* @exception InvalidPhoneNumberException	On invalid phone number format.
 	* @see InvalidPhoneNumberException
 	*/
-
 	public void editPhoneNumber(String phoneNumber) throws InvalidPhoneNumberException {
 		parsePhoneNumber(phoneNumber);
 	}
@@ -108,9 +105,9 @@ public class PhoneNumber implements Serializable {
 	}
 
 	/**
-	* Converts the phone number to a String in the format +x (xxx) xxx-xxxx.
-	* @return A String representation of the PhoneNumber instance.
-	*/
+	 * Returns a string representation of the phone number in the format +x (xxx) xxx-xxxx.
+	 * @return A String representation of the phone number. 
+	 */
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder(20);
@@ -130,9 +127,10 @@ public class PhoneNumber implements Serializable {
 	}
 
 	/**
-	* This method can be used to check whether 2 instances of PhoneNumber are equal.
-	* @return A boolean of indicating whether the phone numbers are equal or not.
-	*/
+	 * Compares this phone number to the specified object o.
+	 * @param o An object to be compared with for equality.
+	 * @return A boolean indicating whether the phone number and object are equal.
+	 */
 	@Override
 	public boolean equals(Object o) {
 		if (o == this)
