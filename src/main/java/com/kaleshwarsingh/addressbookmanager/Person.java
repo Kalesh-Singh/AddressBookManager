@@ -2,7 +2,7 @@ package com.kaleshwarsingh.addressbookmanager;
 
 import java.io.Serializable;
 
-/**>
+/**
  *Provides a convenient way of representing a Person with first and last names, address and phone number.
  *
  * @author	Kaleshwar Singh
