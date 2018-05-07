@@ -5,7 +5,7 @@ import java.util.InputMismatchException;
 import java.io.Serializable;
 
 /**
- *Provides a convenient way of representing an address, regardless of the format."
+ *Provides a convenient way of representing an address, regardless of the format.
  *
  * @author	Kaleshwar Singh
  * @version	1.0

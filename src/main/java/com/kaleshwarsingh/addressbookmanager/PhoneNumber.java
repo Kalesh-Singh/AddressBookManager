@@ -20,11 +20,11 @@ public class PhoneNumber implements Serializable {
 	private String extension = null;
 
 
-	private static final Pattern p 
+	transient private static final Pattern p 
 	= Pattern.compile("^\\s*(?:\\+?(\\d{1,3}))?[-. (]*(\\d{3})[-. )]*(\\d{3})[-. ]*(\\d{4})(?: *x(\\d+))?\\s*$");
 
 		
-	private Matcher m;
+	transient private Matcher m;
 	
 	/**
 	* Constructs an empty PhoneNumber.

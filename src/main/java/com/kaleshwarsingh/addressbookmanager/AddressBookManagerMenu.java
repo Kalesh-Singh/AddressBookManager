@@ -28,7 +28,7 @@ public class AddressBookManagerMenu {
 	}
 
 	/**
-	 * Continuously displays the address book manager menu. Gets teh option selected from standard input and performs the appropriate action. Actions include creating anew address book, opening a saved address book, viewing an open address book, editing an open address book, sorting an open address book, saving an open address book, closing an open address book, and exiting the addressbook manager menu.
+	 * Continuously displays the address book manager menu. Gets the option selected from standard input and performs the appropriate action. Actions include creating anew address book, opening a saved address book, viewing an open address book, editing an open address book, sorting an open address book, saving an open address book, closing an open address book, and exiting the addressbook manager menu.
 	 */
 	public void displayMenu () {
 		while (true) {		
