@@ -35,7 +35,7 @@ public class Address implements Serializable {
 	 * @param state							A String representing the state.
 	 * @param zipCode						An String representing the zip code.
 	 * @exception InvalidAddressException	On invalid address entry.
-	 * @see InvaildAddressException
+	 * @see InvalidAddressException
 	 */
 	public Address (int houseNumber, String street, String city, String state, String zipCode) throws InvalidAddressException {
 		this.editHouseNumber(houseNumber);
@@ -53,7 +53,7 @@ public class Address implements Serializable {
 	 * @param state							A String representing the state.
 	 * @param zipCode						An String representing the zip code.
 	 * @exception InvalidAddressException	On invalid address entry.
-	 * @see InvaildAddressException
+	 * @see InvalidAddressException
 	 */
 
 	public void editAddress (int houseNumber, String street, String city, String state, String zipCode) throws InvalidAddressException {
@@ -77,7 +77,7 @@ public class Address implements Serializable {
 	 * Edits the house number of the address by replacing the old house number with that indicated by the integer houseNumber.
 	 * @param houseNumber					An int representing the house number.
 	 * @exception InvalidAddressException	On invalid address entry.
-	 * @see InvaildAddressException
+	 * @see InvalidAddressException
 	 */
 	public void editHouseNumber(int houseNumber) throws InvalidAddressException {
 		if (houseNumber < 0)
@@ -89,7 +89,7 @@ public class Address implements Serializable {
 	 * Edits the street of the address by replacing the old street with that indicated by the string street.
 	 * @param street						A String representing the street.
 	 * @exception InvalidAddressException	On invalid address entry.
-	 * @see InvaildAddressException
+	 * @see InvalidAddressException
 	 */
 	public void editStreet(String street) {
 		this.street = street;
@@ -99,7 +99,7 @@ public class Address implements Serializable {
 	 * Edits the city of the address by replacing the old city with that indicated by the string city.
 	 * @param city							A String represnting the city.
 	 * @exception InvalidAddressException	On invalid address entry.
-	 * @see InvaildAddressException
+	 * @see InvalidAddressException
 	 */
 	public void editCity(String city) {
 		this.city = city;
@@ -109,7 +109,7 @@ public class Address implements Serializable {
 	 * Edits the state of the address by replacing the old state with that indicated by the stringcity.
 	 * @param state							A String representing the state.
 	 * @exception InvalidAddressException	On invalid address entry.
-	 * @see InvaildAddressException
+	 * @see InvalidAddressException
 	 */
 	public void editState(String state) {
 		this.state = state;
@@ -119,7 +119,7 @@ public class Address implements Serializable {
 	 * Edits the zip code of the address by replacing the old zip code with that indicted by the string zipCode.
 	 * @param zipCode						An String representing the zip code.
 	 * @exception InvalidAddressException	On invalid address entry.
-	 * @see InvaildAddressException
+	 * @see InvalidAddressException
 	 */
 	public void editZipCode(String zipCode) throws InvalidAddressException {
 		if (!isInteger(zipCode))

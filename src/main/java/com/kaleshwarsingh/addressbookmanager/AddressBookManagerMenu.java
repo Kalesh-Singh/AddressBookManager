@@ -171,11 +171,9 @@ public class AddressBookManagerMenu {
 				addressBookManager.openAddressBook(addressBookName);
 			} catch (ClassNotFoundException e) {
 				System.out.println("ERROR: Deserialized object does not match class.");
-				System.out.println(e.getMessage());
 				System.out.println();
 			} catch (IOException e) {
 				System.out.println("ERROR: No data found for, " + addressBookName);
-				System.out.println(e.getMessage());
 				System.out.println();
 			}
 
@@ -195,7 +193,6 @@ public class AddressBookManagerMenu {
 				addressBookManager.saveAddressBook(addressBookName);
 			} catch (IOException e) {
 				System.out.print("ERROR: Could not save, " + addressBookName);
-				System.out.println(e.getMessage());
 				System.out.println();
 			} catch (InvalidNameException e) {
 				System.out.println("ERROR:");
@@ -223,7 +220,6 @@ public class AddressBookManagerMenu {
 
 			} catch (IOException e) {
 				System.out.print("ERROR: Could not save, " + addressBookName);
-				System.out.println(e.getMessage());
 				System.out.println();
 			} catch (InvalidNameException e) {
 				System.out.println("ERROR:");
@@ -277,7 +273,6 @@ public class AddressBookManagerMenu {
 				System.out.println();
 			} catch (IOException e) {
 				System.out.print("ERROR: Could not close and save address book, " + addressBookName);
-				System.out.println(e.getMessage());
 				System.out.println();
 			} 
 		}
@@ -324,7 +319,6 @@ public class AddressBookManagerMenu {
 				System.out.println();
 			} catch (IOException e) {
 				System.out.print("ERROR: Could not close (and save) all address book");
-				System.out.println(e.getMessage());
 				System.out.println();
 			} 
 		} else {

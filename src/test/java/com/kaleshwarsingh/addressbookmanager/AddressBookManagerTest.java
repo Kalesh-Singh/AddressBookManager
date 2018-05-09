@@ -31,13 +31,13 @@ public class AddressBookManagerTest {
 		String addressBookName = "TestAddressBook";
 		addressBookManager.createAddressBook(addressBookName);
 
-		File dir = new File(".");
-		File[] files = dir.listFiles();
+	//	File dir = new File(".");
+	//	File[] files = dir.listFiles();
 		Path path = Paths.get(".", "." + addressBookName + ".dat");
 		if (!Files.deleteIfExists(path))
 			System.out.println("ERROR: Failed to deleted already existing address book.");
 		addressBookManager.saveAddressBook(addressBookName);
-		System.out.println("Address book saved in " + System.getProperty("user.dir"));
+	//	System.out.println("Address book saved in " + System.getProperty("user.dir"));
 
 		Assert.assertTrue(Files.exists(path));
 	}
